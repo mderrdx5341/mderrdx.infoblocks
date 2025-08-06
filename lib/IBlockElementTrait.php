@@ -3,6 +3,10 @@ namespace Mderrdx\Infoblocks;
 
 trait IBlockElementTrait
 {
+    protected $data;
+    protected $iblock;
+    protected $properties = [];
+
     public function iblock()
     {
         return $this->iblock;
@@ -82,7 +86,7 @@ trait IBlockElementTrait
                 if ($prop['PROPERTY_TYPE'] == 'E') {
                     $this->properties[$prop['CODE']] = new PropertyElement($prop, $this); 
                 } else if ($prop['PROPERTY_TYPE'] == 'G') {
-                    $this->properties[$prop['CODE']] = new PropertyGroup($prop, $this); 
+                    $this->properties[$prop['CODE']] = new PropertySection($prop, $this); 
                 } else if ($prop['PROPERTY_TYPE'] == 'L') {
                     $this->properties[$prop['CODE']] = new PropertyList($prop, $this);                 
                 } else {               

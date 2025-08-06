@@ -7,10 +7,33 @@ use CIBlock;
 
 Loader::includeModule('iblock');
 
-class InfoBlocks
+class IBlockContainer
 {
-    public function getList()
+    private static $mapClass = [];
+
+    public static function setClassIBlock($iblock, $className)
     {
+        self::$mapClass[$iblock]['iblock'] = $className;
+        return self::class;
+    }
+
+    public static function setClassSection($iblock, $className)
+    {
+        self::$mapClass[$iblock]['section'] = $className;
+        return self::class;
+    }
+
+    public static function setClassElement($iblock, $className)
+    {
+        self::$mapClass[$iblock]['element'] = $className;
+        return self::class;
+    }
+
+    public static function getList()
+    {
+        echo '<pre>';
+        var_dump(self::$mapClass);
+        echo '</pre>';
         $res = CIBlock::GetList([],[]);
         $iblocks = [];
 
