@@ -12,7 +12,7 @@ class IBlockSection
         $this->iblock = $iblock;
     }
 
-    public function subsections()
+    public function subSections()
     {
         $subSections = $this->iblock->getSections([
             'filter' => [
@@ -35,7 +35,7 @@ class IBlockSection
         return $this->data['ID'];
     }
 
-    public function title()
+    public function name()
     {
         return $this->data['NAME'];
     }

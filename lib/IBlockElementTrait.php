@@ -48,7 +48,7 @@ trait IBlockElementTrait
         return $this->data['ID'];
     }
 
-    public function title(): string
+    public function name(): string
     {
         return $this->data['NAME'];
     }
