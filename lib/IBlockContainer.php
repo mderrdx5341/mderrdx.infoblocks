@@ -17,6 +17,11 @@ class IBlockContainer
         return self::class;
     }
 
+    public static function getClassSection($id)
+    {
+        self::$mapClass[$id]['section'];
+    }
+
     public static function setClassSection($iblock, $className)
     {
         self::$mapClass[$iblock]['section'] = $className;

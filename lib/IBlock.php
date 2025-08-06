@@ -28,6 +28,7 @@ class IBlock
 
     public function getSections($args, $className = '')
     {
+        $className = $className ? IBlockContainer::getClassSection($this->id()) : '';
         $res = CIBlockSection::getList(
             [],
             array_merge(['IBLOCK_ID' => $this->id()], $args['filter']),
