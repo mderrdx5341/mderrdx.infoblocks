@@ -22,14 +22,14 @@ $categories = $catalog->getSections($params);
 //return IBlockSection[]
 $category = $catalog->getSectionById($id);
 //return IBlockSection
-$categpry = $catalog->getSectionByCode($code);
+$category = $catalog->getSectionByCode($code);
 //return IBlockSection
 
 $products = $catalog->getElements($params);
 //return IBlockElement[]
-$product = $catalog->getElementById($params);
+$product = $catalog->getElementById($id);
 //return IBlockElement
-$product = $catalog->getElemenByCode($params);
+$product = $catalog->getElemenByCode($code);
 //return IBlockElement
 ```
 Свойства элемента
