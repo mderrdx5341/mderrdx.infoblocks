@@ -102,7 +102,7 @@ abstract class News
     }
 }
 
-//Persistens
+//Persistence
 namespace App\Data\Models;
 //...
 
@@ -118,7 +118,7 @@ class News extends App\Core\News
     }
 
 }
-
+```
 
 примеры:
 [тут](https://github.com/mderrdx5341/bitrix.is.db)
