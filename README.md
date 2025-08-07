@@ -85,6 +85,41 @@ $category = $catalog->getByCoe($code, '\App\Models\CatalogCategory');
 $product = $catalog->getByCode($code, '\App\Models\CatalogProduct');
 ```
 
+Самый сумашедший вариант: определить класс в business, а в persistence его наследовать, но множественного наследования нет.
+Используем `trait`
+
+```php
+//Core
+namespace App\Core\Models;
+
+abstract class News
+{
+    public abstract function title(): string;
+    public abstract function date(): string ;
+    public function titleWithDate()
+    {
+        return $this->title() . ': ' . $this->date();
+    }
+}
+
+//Persistens
+namespace App\Data\Models;
+//...
+
+class News extends App\Core\News 
+{
+    use IBlockElementTrait;
+
+    public function __construct($data, $iblock){//...От конструктора избавиться увы не удается
+    
+    public function title(): string
+    {
+        return $this->name();
+    }
+
+}
+
+
 примеры:
 [тут](https://github.com/mderrdx5341/bitrix.is.db)
 

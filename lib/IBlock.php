@@ -28,7 +28,7 @@ class IBlock
 
     public function getSections($args, $className = '')
     {
-        $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : '');
+        $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : $className);
 
         $res = CIBlockSection::getList(
             [],
@@ -55,7 +55,7 @@ class IBlock
         );
         $section = null;
         while($sectionData = $res->getNext()) {
-            $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : '');
+            $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : $className);
             $section = $className ? new $className($sectionData, $this) : new IBlockSection($sectionData, $this);
         }
 
@@ -73,7 +73,7 @@ class IBlock
         );
         $section = null;
         while($sectionData = $res->getNext()) {
-            $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : '');
+            $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : $className);
             $section = $className ? new $className($sectionData, $this) : new IBlockSection($sectionData, $this);
         }
 
@@ -91,7 +91,7 @@ class IBlock
         );
 
         $items = [];
-        $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : '');
+        $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : $className);
         while ($item = $res->getNext())
         {
             $items[] = $className ? new $className($item, $this) : new IBlockElement($item, $this);
@@ -113,7 +113,7 @@ class IBlock
         $element = null;
         while ($item = $res->getNext())
         {
-            $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : '');
+            $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : $className);
             $element = $className ? new $className($item, $this) : new IBlockElement($item, $this);
         }
 
@@ -133,7 +133,7 @@ class IBlock
         $element = null;
         while ($item = $res->getNext())
         {
-            $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : '');
+            $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : $className);
             $element = $className ? new $className($item, $this) : new IBlockElement($item, $this);
         }
 
