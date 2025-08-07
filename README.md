@@ -118,6 +118,9 @@ class News extends App\Core\News
     }
 
 }
+//Presentation: template
+
+print $news->titleWithDate();
 ```
 
 примеры:
