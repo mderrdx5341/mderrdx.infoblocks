@@ -15,30 +15,38 @@ $catalog = IBlockContainer::getByID($id);
 
 А теперь выбираем
 ```php
-//return IBlockSection[]
-$categories = $catalog->getSections($params);
-//return IBlockSection
-$category = $catalog->getSectionById($id);
-$categpry = $catalog->getSectionByCode($code);
 
-//return IBlockElement[]
+$categories = $catalog->getSections($params);
+//return IBlockSection[]
+$category = $catalog->getSectionById($id);
+//return IBlockSection
+$categpry = $catalog->getSectionByCode($code);
+//return IBlockSection
+
 $products = $catalog->getElements($params);
-//return IBlockElement
+//return IBlockElement[]
 $product = $catalog->getElementById($params);
+//return IBlockElement
 $product = $catalog->getElemenByCode($params);
+//return IBlockElement
 ```
 Свойства элемента
 ```php
 //Разберетесь сами
 $product->url();
 $product->name();
-//return Property (или другие объекты наследуемые от этого класса)
+
 $property = $product->property('price');
+//return Property (или другие объекты наследуемые от этого класса)
 $product->property('price')->value();
-//return IBlockElement | IBlockElements[] | IBlockSection | IBlockSection[] и так далее..
+
+
 $product->property('brand')->value();
+//return IBlockElement | IBlockElements[] | IBlockSection | IBlockSection[] и так далее..
+
 //нужен просто id или id[]
 $product->property('brand')->rawValue();
+//return int или int[]
 ```
 
 И вот, неожиданно, нам нужно, прям хочется использовать свои объекты с нормальным именем отвечающим бизнес логике, правилам и бла. бла.. бла...
@@ -65,24 +73,24 @@ class CatalogProduct extends IBlockElement {//...
 ```
 И получаем
 ```php
-//return \App\Models\Catalog
 $catalog = IBlockContainer::getByCode('catalog');
-//return \App\Models\CatalogCategory
+//return \App\Models\Catalog
 $category = $catalog->getSectionByCode($code);
-//return \App\Models\CatalogProduct
+//return \App\Models\CatalogCategory
 $product = $catalog->getElementByCode($code);
+//return \App\Models\CatalogProduct
 
 ```
 
 Так же можно добавлять свой класс при выборке, если при данном запросе нужно на горячую поменять(переопределить) класс
 
 ```php
-//return \App\Models\Catalog
 $catalog = IBlockContainer::getByCode('catalog', '\App\Models\Catalog');
-//return \App\Models\CatalogCategory
+//return \App\Models\Catalog
 $category = $catalog->getSectionByCode($code, '\App\Models\CatalogCategory');
-//return \App\Models\CatalogProduct
+//return \App\Models\CatalogCategory
 $product = $catalog->getElementByCode($code, '\App\Models\CatalogProduct');
+//return \App\Models\CatalogProduct
 ```
 
 Самый сумашедший вариант: определить класс в business, а в persistence его наследовать, но множественного наследования нет.
@@ -96,7 +104,7 @@ abstract class News
 {
     public abstract function title(): string;
     public abstract function date(): string ;
-    public function titleWithDate()
+    public function titleWithDate(): string
     {
         return $this->title() . ': ' . $this->date();
     }
@@ -104,7 +112,6 @@ abstract class News
 
 //Persistence
 namespace App\Data\Models;
-//...
 
 class News extends App\Core\News 
 {
