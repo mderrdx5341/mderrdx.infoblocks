@@ -35,7 +35,7 @@ $product->name();
 //return Property (или другие объекты наследуемые от этого класса)
 $property = $product->property('price');
 $product->property('price')->value();
-//return IBlockElement | IBlockSection | и так далее..
+//return IBlockElement | IBlockElements[] | IBlockSection | IBlockSection[] и так далее..
 $product->property('brand')->value();
 //нужен просто id
 $product->property('brand')->rawValue();
