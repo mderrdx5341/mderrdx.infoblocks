@@ -68,9 +68,9 @@ class CatalogProduct extends IBlockElement {//...
 //return \App\Models\Catalog
 $catalog = IBlockContainer::getByCode('catalog');
 //return \App\Models\CatalogCategory
-$category = $catalog->getByCoe($code);
+$category = $catalog->getSectionByCode($code);
 //return \App\Models\CatalogProduct
-$product = $catalog->getByCode($code);
+$product = $catalog->getElementByCode($code);
 
 ```
 
@@ -80,9 +80,9 @@ $product = $catalog->getByCode($code);
 //return \App\Models\Catalog
 $catalog = IBlockContainer::getByCode('catalog', '\App\Models\Catalog');
 //return \App\Models\CatalogCategory
-$category = $catalog->getByCoe($code, '\App\Models\CatalogCategory');
+$category = $catalog->getSectionByCode($code, '\App\Models\CatalogCategory');
 //return \App\Models\CatalogProduct
-$product = $catalog->getByCode($code, '\App\Models\CatalogProduct');
+$product = $catalog->getElementByCode($code, '\App\Models\CatalogProduct');
 ```
 
 Самый сумашедший вариант: определить класс в business, а в persistence его наследовать, но множественного наследования нет.
