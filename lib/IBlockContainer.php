@@ -11,26 +11,46 @@ class IBlockContainer
 {
     private static $mapClass = [];
 
-    public static function setClassIBlock($iblock, $className)
+    public static function getClassSection($iblock)
     {
-        self::$mapClass[$iblock]['iblock'] = $className;
+        return self::$mapClass[$iblock]['section'];
+    }
+
+    public static function setClassIBlock($iblockCode, $className)
+    {
+        $iblockId = 0;
+        if (empty(self::$mapClass[$iblockCode]) || !isset(self::$mapClass[$iblockCode]['iblock'])) {
+            $iblockId = self::getByCode($iblockCode)->id();
+        }
+        self::$mapClass[$iblockCode]['iblock'] = $className;
+        self::$mapClass[$iblockId]['iblock'] = $className;
         return self::class;
     }
 
-    public static function getClassSection($id)
+    public static function setClassSection($iblockCode, $className)
     {
-        self::$mapClass[$id]['section'];
-    }
-
-    public static function setClassSection($iblock, $className)
-    {
-        self::$mapClass[$iblock]['section'] = $className;
+        $iblockId = 0;
+        if (empty(self::$mapClass[$iblockCode]) || !isset(self::$mapClass[$iblockCode]['section'])) {
+            $iblockId = self::getByCode($iblockCode)->id();
+        }
+        self::$mapClass[$iblockCode]['section'] = $className;
+        self::$mapClass[$iblockId]['section'] = $className;
         return self::class;
     }
 
-    public static function setClassElement($iblock, $className)
+    public static function getClassElement($iblock)
     {
-        self::$mapClass[$iblock]['element'] = $className;
+        return self::$mapClass[$iblock]['element'];
+    }
+
+    public static function setClassElement($iblockCode, $className)
+    {
+        $iblockId = 0;
+        if (empty(self::$mapClass[$iblockCode]) || !isset(self::$mapClass[$iblockCode]['element'])) {
+            $iblockId = self::getByCode($iblockCode)->id();
+        }
+        self::$mapClass[$iblockCode]['element'] = $className;
+        self::$mapClass[$iblockId]['element'] = $className;
         return self::class;
     }
 

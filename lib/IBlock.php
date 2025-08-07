@@ -28,7 +28,8 @@ class IBlock
 
     public function getSections($args, $className = '')
     {
-        $className = $className ? IBlockContainer::getClassSection($this->id()) : '';
+        $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : '');
+
         $res = CIBlockSection::getList(
             [],
             array_merge(['IBLOCK_ID' => $this->id()], $args['filter']),
@@ -37,7 +38,7 @@ class IBlock
         );
         $sections = [];
         while($section = $res->getNext()) {
-            $sections[] = $className ? new $className($section, $this) : new IBlockSection($section, $this);
+            $sections[] = ($className !== '' ? new $className($section, $this) : new IBlockSection($section, $this));
         }
 
         return $sections;
@@ -45,6 +46,7 @@ class IBlock
 
     public function getSectionById($id, $className = '')
     {
+        
         $res = CIBlockSection::getList(
             [],
             ['IBLOCK_ID' => $this->id(), 'ID' => $id],
@@ -53,6 +55,7 @@ class IBlock
         );
         $section = null;
         while($sectionData = $res->getNext()) {
+            $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : '');
             $section = $className ? new $className($sectionData, $this) : new IBlockSection($sectionData, $this);
         }
 
@@ -61,6 +64,7 @@ class IBlock
 
     public function getSectionByCode($code, $className = '')
     {
+       
         $res = CIBlockSection::getList(
             [],
             ['IBLOCK_ID' => $this->id(), 'CODE' => $code],
@@ -69,6 +73,7 @@ class IBlock
         );
         $section = null;
         while($sectionData = $res->getNext()) {
+            $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : '');
             $section = $className ? new $className($sectionData, $this) : new IBlockSection($sectionData, $this);
         }
 
@@ -86,6 +91,7 @@ class IBlock
         );
 
         $items = [];
+        $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : '');
         while ($item = $res->getNext())
         {
             $items[] = $className ? new $className($item, $this) : new IBlockElement($item, $this);
@@ -104,14 +110,14 @@ class IBlock
             []
         );
 
-        $news = null;
+        $element = null;
         while ($item = $res->getNext())
         {
-
-            $news = $className ? new $className($item, $this) : new IBlockElement($item, $this);
+            $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : '');
+            $element = $className ? new $className($item, $this) : new IBlockElement($item, $this);
         }
 
-        return $news;
+        return $element;
     }
 
     public function getElementByCode($code, $className = '')
@@ -124,14 +130,14 @@ class IBlock
             []
         );
 
-        $news = null;
+        $element = null;
         while ($item = $res->getNext())
         {
-
-            $news = $className ? new $className($item, $this) : new IBlockElement($item, $this);
+            $className = ($className === '' ? IBlockContainer::getClassElement($this->id()) : '');
+            $element = $className ? new $className($item, $this) : new IBlockElement($item, $this);
         }
 
-        return $news;
+        return $element;
     }
 
     public function editAreaId()
