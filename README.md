@@ -37,7 +37,7 @@ $property = $product->property('price');
 $product->property('price')->value();
 //return IBlockElement | IBlockElements[] | IBlockSection | IBlockSection[] и так далее..
 $product->property('brand')->value();
-//нужен просто id
+//нужен просто id или id[]
 $product->property('brand')->rawValue();
 ```
 
