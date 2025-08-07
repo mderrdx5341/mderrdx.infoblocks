@@ -11,11 +11,6 @@ class IBlockContainer
 {
     private static $mapClass = [];
 
-    public static function getClassSection($iblock)
-    {
-        return self::$mapClass[$iblock]['section'];
-    }
-
     public static function setClassIBlock($iblockCode, $className)
     {
         $iblockId = 0;
@@ -25,6 +20,11 @@ class IBlockContainer
         self::$mapClass[$iblockCode]['iblock'] = $className;
         self::$mapClass[$iblockId]['iblock'] = $className;
         return self::class;
+    }
+
+    public static function getClassSection($iblock)
+    {
+        return self::$mapClass[$iblock]['section'];
     }
 
     public static function setClassSection($iblockCode, $className)
@@ -56,9 +56,9 @@ class IBlockContainer
 
     public static function getList()
     {
-        echo '<pre>';
-        var_dump(self::$mapClass);
-        echo '</pre>';
+        // echo '<pre>';
+        // var_dump(self::$mapClass);
+        // echo '</pre>';
         $res = CIBlock::GetList([],[]);
         $iblocks = [];
 
@@ -74,10 +74,10 @@ class IBlockContainer
     public static function getById($id, $className = '')
     {
         $res = CIBlock::GetList([],['ID' => $id]);
-        $iblocks = [];
 
         while($iblockData = $res->fetch())
         {
+            $className = ($className === '' ? self::getClassIBlock($iblockData['ID']) : '');
             return $className ? new $className($iblockData) : new IBlock($iblockData);
         }
     }
@@ -85,11 +85,16 @@ class IBlockContainer
     public static function getByCode($code, $className = '')
     {
         $res = CIBlock::GetList([],['CODE' => $code]);
-        $iblocks = [];
 
         while($iblockData = $res->fetch())
         {
+            $className = ($className === '' ? self::getClassIBlock($iblockData['ID']) : '');
             return $className ? new $className($iblockData) : new IBlock($iblockData);
         }
+    }
+
+    public static function getClassIBlock($id)
+    {
+        return self::$mapClass[$id]['iblock'];
     }
 }
