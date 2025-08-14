@@ -53,9 +53,14 @@ trait IBlockElementTrait
         return $this->data['NAME'];
     }
 
-    public function date(): string
+    public function createdDate(): \DateTime
     {
-        return $this->data['CREATED_DATE'];
+        $dateTime = new \DateTime(
+            ConvertDateTime($this->data['CREATED_DATE'],
+                'YYYY.MM.DD'
+            )
+        );
+        return $dateTime;
     }
 
     public function previewText()
