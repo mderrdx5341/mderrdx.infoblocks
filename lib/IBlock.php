@@ -26,6 +26,11 @@ class IBlock
         return $this->data['CODE'];
     }
 
+    public function name()
+    {
+        return $this->data['NAME'];
+    }
+
     public function getSections($args, $className = '')
     {
         $className = ($className === '' ? IBlockContainer::getClassSection($this->id()) : $className);

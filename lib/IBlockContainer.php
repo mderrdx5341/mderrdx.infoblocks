@@ -85,7 +85,6 @@ class IBlockContainer
     public static function getByCode($code, $className = '')
     {
         $res = CIBlock::GetList([],['CODE' => $code]);
-
         while($iblockData = $res->fetch())
         {
             $className = ($className === '' ? self::getClassIBlock($iblockData['ID']) : '');

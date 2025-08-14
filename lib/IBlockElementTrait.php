@@ -73,6 +73,11 @@ trait IBlockElementTrait
         return $this->data['DETAIL_PAGE_URL'];
     }
 
+    public function previewImg()
+    {
+        return \CFile::GetById($this->data['PREVIEW_PICTURE'])->getNext();
+    }
+
     public function property($name)
     {
         if($this->properties[$name]) {
