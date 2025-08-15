@@ -55,11 +55,9 @@ trait IBlockElementTrait
 
     public function createdDate(): \DateTime
     {
+        $d = explode('.', $this->data['CREATED_DATE']);
         $dateTime = new \DateTime(
-            ConvertDateTime(
-                $this->data['CREATED_DATE'],
-                'YYYY.MM.DD'
-            )
+            $d[0] . '-' . $d[1] . '-' . $d[2]
         );
         return $dateTime;
     }
