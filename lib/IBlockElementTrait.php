@@ -67,6 +67,11 @@ trait IBlockElementTrait
         return $this->data['PREVIEW_TEXT'];
     }
 
+    public function previewTextRaw()
+    {
+        return $this->data['~PREVIEW_TEXT'];
+    }
+
     public function detailText()
     {
         return $this->data['DETAIL_TEXT'];
@@ -80,6 +85,11 @@ trait IBlockElementTrait
     public function previewImg()
     {
         return \CFile::GetById($this->data['PREVIEW_PICTURE'])->getNext();
+    }
+
+    public function detailImg()
+    {
+        return \CFile::GetById($this->data['DETAIL_PICTURE'])->getNext();
     }
 
     public function property($name)

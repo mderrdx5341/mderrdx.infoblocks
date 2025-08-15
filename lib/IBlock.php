@@ -26,6 +26,11 @@ class IBlock
         return $this->data['CODE'];
     }
 
+    public function description()
+    {
+        return $this->data['DESCRIPTION'];
+    }
+
     public function name()
     {
         return $this->data['NAME'];
