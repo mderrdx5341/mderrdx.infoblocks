@@ -1,7 +1,7 @@
 <?php
 namespace Mderrdx\Infoblocks;
 
-class File
+class FileImage extends File
 {
     private $id;
     private $fileData;
@@ -21,6 +21,16 @@ class File
     {
 
         return $this->fileData['SRC'];
+    }
+
+    /**
+     * $type = BX_RESIZE_IMAGE_PROPORTIONAL | BX_RESIZE_IMAGE_EXACT
+     */
+
+    public function resizeUrl($width, $height, $type = 'BX_RESIZE_IMAGE_PROPORTIONAL')
+    {
+        $resizedImage = \CFile::ResizeImageGet($this->id, ['width' => $width, 'height' => $height], $type);
+        return $resizedImage['src'];
     }
 
     private function fileData()

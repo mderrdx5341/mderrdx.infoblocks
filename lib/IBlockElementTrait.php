@@ -84,13 +84,12 @@ trait IBlockElementTrait
 
     public function previewImg()
     {
-        return new File($this->data['PREVIEW_PICTURE']);
-        //return \CFile::GetById($this->data['PREVIEW_PICTURE'])->getNext();
+        return new FileImage($this->data['PREVIEW_PICTURE']);
     }
 
     public function detailImg()
     {
-        return \CFile::GetById($this->data['DETAIL_PICTURE'])->getNext();
+        return new FileImage($this->data['DETAIL_PICTURE']);
     }
 
     public function property($name)
